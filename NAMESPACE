@@ -1,0 +1,4 @@
+exportPattern("^[[:alpha:]]+")
+import(raster)
+import(crawl)
+import(Matrix)

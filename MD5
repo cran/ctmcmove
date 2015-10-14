@@ -1,0 +1,14 @@
+846a014ce91a19e7b371d2ac80af4c16 *DESCRIPTION
+d5a34168638d48643c3ad67616d6b15e *NAMESPACE
+8b0e65c46431eb994d5fe8a79f93c4ba *R/ctmc2glm.R
+63d5b96b3b8e9ecb52a83f4795247827 *R/get.crawl.path.R
+1742a60d564c0cfc1b0e999277970d28 *R/path2ctmc.R
+7cca163d8abe850fd60e4ec2538d1924 *R/rast.grad.R
+9b8da18714841427d308f6eb9012dca8 *build/partial.rdb
+23aeffd6fa6bfbf4948639361443df03 *data/seal.rda
+3df7747782bb3fcc191eaf7101607455 *man/ctmc2glm.Rd
+e460ab10004670c766b6261c30224230 *man/ctmcmove-package.Rd
+2687f1051390cbbc9ddec2d0bd380310 *man/get.crawl.path.Rd
+1b6cdf53b830a8e70e5444ed9446381b *man/path2ctmc.Rd
+90875ceb6919ca04d5290dda1e89b901 *man/rast.grad.Rd
+428ceb38289f9e68b97e2e4dccbca433 *man/seal.Rd
