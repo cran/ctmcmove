@@ -1,5 +1,5 @@
 ctmc2glm <-
-function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.point.decreasing=TRUE){
+function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.point.decreasing=TRUE,include.cell.locations=TRUE){
 
     ## Function to take a CTMC path and covariate rasters and return data
     ##  that can be fit as a Poisson GLM
@@ -149,8 +149,14 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
     colnames(X)[ncol(X)]="crw"
   }
   
-  #browser()
-  
+  ## browser()
+
+    if(include.cell.locations){
+        xys=cbind(xy.cell,xy.adj)
+        colnames(xys)=c("x.current","y.current","x.adj","y.adj")
+        X=cbind(X,xys)
+    }
+                
 
   T=length(wait.times)
   p=ncol(X)

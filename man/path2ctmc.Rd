@@ -12,7 +12,7 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-path2ctmc(xy, t, rast)
+path2ctmc(xy, t, rast,print.iter=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +28,11 @@ path2ctmc(xy, t, rast)
   A raster object or raster stack object that will define the
   discrete-space grid cells for the CTMC movement path.
 %%     ~~Describe \code{rast} here~~
+}
+\item{print.iter}{
+  Logical.  If true, then the progress stepping through each
+  observed location in "xy" and "t" will be output in the 
+   terminal.
 }
 }
 \details{

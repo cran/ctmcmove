@@ -59,6 +59,7 @@ Biological, and Environmental Statistics, 2010, 15, 523-538
 %% \seealso{
 %% }
 \examples{
+\dontrun{
 ##
 ## Example of using a CTMC model for movement
 ##
@@ -216,6 +217,6 @@ fit=gam(z~cha+npp+sst+crw++s(t,by=-d2r),
 summary(fit)
 plot(fit)
 
-
+}
 
 }

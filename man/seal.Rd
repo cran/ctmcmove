@@ -19,8 +19,6 @@ Data for one foraging trip by a male northern fur seal (NFS).%%   ~~ data name/k
 \usage{data("seal")}
 \format{
   The format is:
-List of 10
- $ tripID    : num 156
  $ locs      :'data.frame':	163 obs. of  6 variables:
   ..$ datetime  : num [1:163] 36741 36741 36741 36742 36742 ...
   ..$ latitude  : num [1:163] 57.2 57.3 57.3 57.2 57.5 ...
@@ -28,8 +26,6 @@ List of 10
   ..$ landseamig: int [1:163] 0 1 1 1 1 1 1 1 1 1 ...
   ..$ lqadjust  : int [1:163] 5 1 0 -2 -2 1 -2 -2 -2 -2 ...
   ..$ lq        : Factor w/ 8 levels "0","1","2","3",..: 5 2 1 7 7 2 7 7 7 7 ...
- $ year      : int 2000
- $ rookery   : Factor w/ 2 levels "Reef","Vostochni": 2
  $ sex       : Factor w/ 2 levels "female","male": 2
  $ start.date: Factor w/ 131 levels "10/10/1999","10/11/1999",..: 80
  $ end.date  : Factor w/ 131 levels "10/10/1999","10/11/1999",..: 66

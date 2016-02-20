@@ -10,7 +10,8 @@ Convert a "ctmc" object into Poisson glm format.%%  ~~function to do ... ~~
 }
 \usage{
 ctmc2glm(ctmc, stack.static, stack.grad, crw = TRUE,
-    normalize.gradients = FALSE, grad.point.decreasing = TRUE)
+    normalize.gradients = FALSE, grad.point.decreasing = TRUE,
+    include.cell.locations=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -39,6 +40,11 @@ Logical.  If TRUE, then the gradient covariates are positive in the
 direction of decreasing values of the covariate.  If FALSE, then the
 gradient covariates are positive in the direction of increasing values
 of the covariate (like a true gradient).
+  }
+  \item{include.cell.locations}{
+Logical.  If TRUE, then the x and y locations of the centers of the (1) current
+ and (2) neighboring raster cells will be returned for each row in the created 
+ data matrix.
   }
 }
 \details{

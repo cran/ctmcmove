@@ -20,8 +20,7 @@ A numeric value - the time step.
   }
 }
 \details{
-  This code creates one data row for each possible transition from each
-  grid cell visited by the CTMC path.
+  Uses the method of homogenization to compute the probability transition matrix given by exp(Q*t).
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
