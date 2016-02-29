@@ -1,12 +1,12 @@
-b5fa27b7943f26b0013f92b86ed6512b *DESCRIPTION
+6d30796e8226beafe216ae1887d2c59a *DESCRIPTION
 5fd51e0fcef6bbdcda717d63c334d228 *NAMESPACE
 c96a8ebc622ba6a3454ee0c8a35f593b *R/Pctmc.R
 52fd8b259554fccbe56b9cfb352745e4 *R/ctmc.sim.R
 f387f9eb281d50ba6f2e691879a5c92d *R/ctmc2glm.R
 63d5b96b3b8e9ecb52a83f4795247827 *R/get.crawl.path.R
-0473d4a43015f134b4d0ffeb067affb3 *R/path2ctmc.R
+b81b0bcb97a422f76d93e1f6e05dd86e *R/path2ctmc.R
 7cca163d8abe850fd60e4ec2538d1924 *R/rast.grad.R
-f90029d53cb14e8f5ce82e8b44bbe454 *build/partial.rdb
+1835c482d4cbb63699fb3e1ffda5efec *build/partial.rdb
 23aeffd6fa6bfbf4948639361443df03 *data/seal.rda
 9b4d18d8dd1fd0a6db530fe93780b654 *man/Pctmc.Rd
 6a928da5c2ce0de0749f39564c617395 *man/ctmc.sim.Rd

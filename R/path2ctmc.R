@@ -54,8 +54,8 @@ path2ctmc <- function(xy,t,rast,print.iter=FALSE){
                 d=sqrt(sum((xyt.1[-3]-xyt.2[-3])^2))
                 rast.res=res(rast)[1]
                 ## linearly interpolate
-                xapprox=approx(c(xyt.1[3],xyt.2[3]),c(xyt.1[1],xyt.2[1]),n=round(d/rast.res*100))
-                yapprox=approx(c(xyt.1[3],xyt.2[3]),c(xyt.1[2],xyt.2[2]),n=round(d/rast.res*100))
+                xapprox=approx(c(xyt.1[3],xyt.2[3]),c(xyt.1[1],xyt.2[1]),n=max(100,round(d/rast.res*100)))
+                yapprox=approx(c(xyt.1[3],xyt.2[3]),c(xyt.1[2],xyt.2[2]),n=max(100,round(d/rast.res*100)))
                 tapprox=xapprox$x
                 xapprox=xapprox$y
                 yapprox=yapprox$y
