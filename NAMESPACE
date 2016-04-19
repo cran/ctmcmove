@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
 import(raster)
-import(crawl)
 import(Matrix)
-importFrom("stats", "dpois", "rexp","approx")
+import(fda)
+importFrom("stats", "dpois", "rexp","approx","dgamma","rnorm","rgamma")

@@ -19,6 +19,10 @@ path2ctmc <- function(xy,t,rast,print.iter=FALSE){
     ## path should be a Tx3 matrix with columns: x,y,t
     path=cbind(xy,t)
 
+    ## check to make sure t is in time order
+    tidx=sort(t,index.return=T)$ix
+    path=path[tidx,]
+
     
     T=nrow(path)
 

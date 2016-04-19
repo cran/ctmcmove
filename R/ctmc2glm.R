@@ -162,8 +162,12 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   p=ncol(X)
   
   #browser()
+    
   
 
   out=data.frame(z=z,X,tau=tau,t=t)
-  out
+  ## remove last time step
+    T=nrow(out)
+    out=out[-((T-3):T),]
+    out
 }
