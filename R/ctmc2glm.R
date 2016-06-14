@@ -1,5 +1,5 @@
 ctmc2glm <-
-function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.point.decreasing=TRUE,include.cell.locations=TRUE){
+function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.point.decreasing=TRUE,include.cell.locations=TRUE,directions=4){
 
     ## Function to take a CTMC path and covariate rasters and return data
     ##  that can be fit as a Poisson GLM
@@ -52,13 +52,14 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   ## Make X matrix 
   ##
 
-  sort.idx=sort(locs,index.return=TRUE)$ix
+  ## sort.idx=sort(locs,index.return=TRUE)$ix
   ## This is for a rook's neighborhood
-  n.nbrs=4
-  sort.idx=rep(sort.idx,each=n.nbrs)
-  time.idx=rep(1:(length(locs)-1),each=n.nbrs)
-  adj=adjacent(examplerast,locs,pairs=TRUE,sorted=TRUE,id=TRUE)
+##  n.nbrs=4
+  ## sort.idx=rep(sort.idx,each=n.nbrs)
+  adj=adjacent(examplerast,locs,pairs=TRUE,sorted=TRUE,id=TRUE,directions=directions)
   adj.cells=adj[,3]
+  rr=rle(adj[,1])
+    time.idx=rep(rr$values,times=rr$lengths)
   start.cells=adj[,2]
   z=rep(0,length(start.cells))
   idx.move=rep(0,length(z))
@@ -76,9 +77,9 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
 
   
   ## Tau
-  tau=rep(wait.times,each=n.nbrs)
+  tau=rep(wait.times,times=rr$lengths)
   ##
-  t=rep(ctmc$trans.times,each=n.nbrs)
+  t=rep(ctmc$trans.times,times=rr$lengths)
       
   ##
   ## Get x values for static covariates
@@ -120,12 +121,18 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   ##
   ## should probably figure a better way to handle diagonals.
   ##
-  idx.move=rep(1,length(locs))
-  idx.move[-which(diag.move==1)] <- which(z==1)
 
-  v.moves=v.adj[rep(idx.move,each=n.nbrs),]
+    ## update 20160519
+        ##     idx.move=rep(,length(locs))
+        ## idx.move[-which(diag.move==1)] <- which(z==1)
+    idx.move=which(z==1)
+    ## last point
+    idx.move=c(idx.move,length(z))
+
+    
+  v.moves=v.adj[rep(idx.move[1:(length(rr$lengths)-1)],times=rr$lengths[-1]),]
   ## shift v.moves to be a lag 1 direction
-  v.moves=rbind(matrix(0,ncol=2,nrow=n.nbrs),v.moves[-(nrow(v.moves):(nrow(v.moves)-n.nbrs+1)),])
+  v.moves=rbind(matrix(0,ncol=2,nrow=rr$lengths[1]),v.moves)
   ## dot product with vectors to adjacent cells
   #browser()
   X.crw=apply(v.moves*v.adj,1,sum)

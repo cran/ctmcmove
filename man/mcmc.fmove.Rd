@@ -72,28 +72,34 @@ mcmc.fmove(xy,t,fdabasis,tpred=t,QQ="CAR2",a=1,b=1,r=1,q=1,
   telemetry locations.  The model fit is as follows (written out for 1-D):
 
   y_t = observed location at time t
+  
   z_t = Sum_k beta_k*phi_k(t) = true location at time t, expressed using
   a linear combination of spline basis functions phi_k(t).
 
   y_t ~ N( z_t , sigma^2 )
+  
   beta ~ N( 0 , tau^2 * QQ^{-1} )
+  
   sigma^2 ~ IG(a,b)
+  
   tau^2 ~ IG(r,q)
   
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  A list with the following entries.
-  1. s2.save = numeric vector of the values of sigma^2 at each mcmc
-  iteration
-  2. tau2.save = numeric vector of the values of tau^2 at each mcmc
-  iteration
-  3. pathlist = a list of length num.paths.save, with each item itself
+  \item{s2.save}{Numeric vector of the values of sigma^2 at each mcmc
+  iteration}
+  \item{tau2.save}{Numeric vector of the values of tau^2 at each mcmc
+  iteration}
+  \item{pathlist}{A list of length num.paths.save, with each item itself
   being a list with two entries:
+  
     xy = a matrix with rows corresponding to x,y locations of the
     quasi-continuous path imputation
+  
     t = a vector with entries corresponding to the times at which the
     quasi-continuous path was imputed
+    }
 }
 \references{
   Buderman, F.E.; Hooten, M. B.; Ivan, J. S. and Shenk, T. M.  A

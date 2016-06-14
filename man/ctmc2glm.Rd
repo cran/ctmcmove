@@ -11,7 +11,7 @@ Convert a "ctmc" object into Poisson glm format.%%  ~~function to do ... ~~
 \usage{
 ctmc2glm(ctmc, stack.static, stack.grad, crw = TRUE,
     normalize.gradients = FALSE, grad.point.decreasing = TRUE,
-    include.cell.locations=TRUE)
+    include.cell.locations=TRUE,directions=4)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -46,6 +46,11 @@ Logical.  If TRUE, then the x and y locations of the centers of the (1) current
  and (2) neighboring raster cells will be returned for each row in the created 
  data matrix.
   }
+  \item{directions}{
+    Integer.  Either 4 (indicating a "Rook's neighborhood" of 4
+    neighboring grid cells) or 8 (indicating a
+    "King's neighborhood" of 8 neighboring grid cells).
+    }
 }
 \details{
   This code creates one data row for each possible transition from each
