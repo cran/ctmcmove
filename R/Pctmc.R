@@ -30,7 +30,7 @@ Pctmc <- function(Q,t){
     Phat=R/r
     diag(Phat) <- 1-rvals/r
     rt=r*t
-    K=ceiling(max(c(rt+5*sqrt(rt),20)))
+    K=ceiling(min(c(rt+5*sqrt(rt),20)))
     P=diag(N)*dpois(0,rt)
     Pk=diag(N)
     for(k in 1:K){

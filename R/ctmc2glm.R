@@ -1,5 +1,5 @@
 ctmc2glm <-
-function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.point.decreasing=TRUE,include.cell.locations=TRUE,directions=4){
+function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.point.decreasing=TRUE,include.cell.locations=TRUE,directions=4,zero.idx=integer()){
 
     ## Function to take a CTMC path and covariate rasters and return data
     ##  that can be fit as a Poisson GLM
@@ -52,11 +52,14 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   ## Make X matrix 
   ##
 
+    ## raster cells that are NOT in "zero.idx"
+    notzero.idx=1:ncell(examplerast)[-zero.idx]
+
   ## sort.idx=sort(locs,index.return=TRUE)$ix
   ## This is for a rook's neighborhood
 ##  n.nbrs=4
   ## sort.idx=rep(sort.idx,each=n.nbrs)
-  adj=adjacent(examplerast,locs,pairs=TRUE,sorted=TRUE,id=TRUE,directions=directions)
+  adj=adjacent(examplerast,locs,pairs=TRUE,sorted=TRUE,id=TRUE,directions=directions,target=notzero.idx)
   adj.cells=adj[,3]
   rr=rle(adj[,1])
     time.idx=rep(rr$values,times=rr$lengths)

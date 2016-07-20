@@ -1,22 +1,30 @@
-\name{ctmc2glm}
-\alias{ctmc2glm}
+\name{get.rate.matrix}
+\alias{get.rate.matrix}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Convert a "ctmc" object into Poisson glm format.%%  ~~function to do ... ~~
+Create a CTMC rate matrix from rasters and parameter estimates.%%  ~~function to do ... ~~
 }
 \description{
-  Transforms a "ctmc" object and covariate rasters into data suitable for analysis using
-  Poisson GLM software (like glm in R). 
+  Creates a CTMC rate matrix from rasters and parameter estimates
+  (perhaps from a GLM analysis). 
 }
 \usage{
-ctmc2glm(ctmc, stack.static, stack.grad, crw = TRUE,
+get.rate.matrix(beta.static,beta.grad, stack.static, stack.grad,
     normalize.gradients = FALSE, grad.point.decreasing = TRUE,
-    include.cell.locations=TRUE,directions=4,zero.idx=integer())
+    directions=4, zero.idx=integer())
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{ctmc}{
-A "ctmc" object (output from "path2ctmc").
+  \item{beta.static}{
+A vector of regression parameters corresponding to "motility" covariates
+in stack.static.  The length of beta.static should equal the number of
+layers in stack.static.
+  }
+  \item{beta.grad}{
+A vector of regression parameters corresponding to "directional" or
+"gradient" covariates
+in stack.grad.  The length of beta.static should equal the number of
+layers in stack.grad.
   }
   \item{stack.static}{
 A rasterStack object, where each layer in the stack is a location-based covariate.
@@ -24,12 +32,6 @@ A rasterStack object, where each layer in the stack is a location-based covariat
   \item{stack.grad}{
     A rasterStack object, where each layer in the stack is a directional
     gradient-based covariate
-}
-\item{crw}{
-  Logical.  If TRUE (default), an autocovariate is created for each cell
-  visited in the CTMC movement path.  The autocovariate is a
-  unit-length directional vector pointing from the center of the most
-  recent grid cell to the center of the current grid cell. 
 }
   \item{normalize.gradients}{
     Logical.  Default is FALSE.  If TRUE, then all gradient
@@ -40,11 +42,6 @@ Logical.  If TRUE, then the gradient covariates are positive in the
 direction of decreasing values of the covariate.  If FALSE, then the
 gradient covariates are positive in the direction of increasing values
 of the covariate (like a true gradient).
-  }
-  \item{include.cell.locations}{
-Logical.  If TRUE, then the x and y locations of the centers of the (1) current
- and (2) neighboring raster cells will be returned for each row in the created 
- data matrix.
   }
   \item{directions}{
     Integer.  Either 4 (indicating a "Rook's neighborhood" of 4
@@ -57,19 +54,15 @@ Logical.  If TRUE, then the x and y locations of the centers of the (1) current
     }
 }
 \details{
-  This code creates one data row for each possible transition from each
-  grid cell visited by the CTMC path.
+  This function takes the covariate rasters in stack.static (motility
+  covariates) and stack.grad (gradient covariates) and creates a CTMC
+  rate matrix defining movement between all neighboring raster grid
+  cells.  It is NOT possible to include an autocovariate here ("crw" in
+  ctmc2glm).
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  \item{z}{Response variable (either zero or 1) for analysis using GLM
-    software.}
-  \item{X}{Matrix of predictor variables for analysis using GLM
-    software.  Created from the location-based
-    and gradient-based covariates.}
-  \item{tau}{Offset for each row in a Poisson GLM with log link.}
-  \item{t}{Vector of the time each raster grid cell was entered} 
-  
+  An n-by-n Matrix of CTMC rate values.
   %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
@@ -78,7 +71,7 @@ Logical.  If TRUE, then the x and y locations of the centers of the (1) current
 }
 \references{
 Hanks, E. M.; Hooten, M. B. & Alldredge, M. W. Continuous-time
-Discrete-space Models for Animal Movement The Annals of Applied
+Discrete-space Models for Animal Movement.  The Annals of Applied
 Statistics, 2015, 9, 145-165
 %% ~put references to the literature/web site here ~
 }
