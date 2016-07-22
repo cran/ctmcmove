@@ -53,8 +53,11 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   ##
 
     ## raster cells that are NOT in "zero.idx"
-    notzero.idx=1:ncell(examplerast)[-zero.idx]
-
+    notzero.idx=1:ncell(examplerast)
+    if(length(zero.idx)>0){
+        notzero.idx=notzero.idx[-zero.idx]
+    }
+    
   ## sort.idx=sort(locs,index.return=TRUE)$ix
   ## This is for a rook's neighborhood
 ##  n.nbrs=4
