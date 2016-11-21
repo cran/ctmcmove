@@ -12,7 +12,7 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-path2ctmc(xy, t, rast,print.iter=FALSE)
+path2ctmc(xy, t, rast,directions=4,zero.idx=integer(),print.iter=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +29,16 @@ path2ctmc(xy, t, rast,print.iter=FALSE)
   discrete-space grid cells for the CTMC movement path.
 %%     ~~Describe \code{rast} here~~
 }
+\item{directions}{
+    Integer.  Either 4 (indicating a "Rook's neighborhood" of 4
+    neighboring grid cells) or 8 (indicating a
+    "King's neighborhood" of 8 neighboring grid cells).
+  }
+  \item{zero.idx}{
+    Integer vector of the indices of raster cells that are not passable
+    and should be excluded.  These are cells where movement should be
+    impossible.  Default is zero.idx=integer(). 
+    }
 \item{print.iter}{
   Logical.  If true, then the progress stepping through each
   observed location in "xy" and "t" will be output in the 
@@ -38,7 +48,11 @@ path2ctmc(xy, t, rast,print.iter=FALSE)
 \details{
   This takes a xyt path and turns it into a list of the embedded chain
   and residence times of a continuous time Markov chain walk on the
-  graph.  "Diagonal" transitions are fixed with linear interpolation.
+  graph.  A "zero.idx" indicates impassible grid cells.  When successive
+  (x,y) locations are not in the same grid cell, a shortest path between
+  locations is found using the "shortestPath" function from gdistance,
+  and the time between (x,y) locations is then 
+  evenly divided between all grid cells in the shortest path.  
   %%  ~~ If necessary, more details than the description above ~~
 }
 \value{

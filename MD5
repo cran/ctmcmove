@@ -1,12 +1,12 @@
-9bfbf57d54869d11b231981a77268b86 *DESCRIPTION
-58a6d15a0177c8cdc5a0ff05ef73bc23 *NAMESPACE
+73a11e45874dd2a666383209894eb2d3 *DESCRIPTION
+69babc86f94d6d4f1166f1d978c15c2c *NAMESPACE
 936be4b3fc99664e891d04ad8b4293f2 *R/Pctmc.R
 52fd8b259554fccbe56b9cfb352745e4 *R/ctmc.sim.R
 12d17e9a55470fb629ef0db0ed6e3d73 *R/ctmc2glm.R
 2fb09f5478718636ce3e56e05dea7ad8 *R/get.UD.R
 e130240d29c01c402b2e6555331b7f3b *R/get.rate.matrix.R
 d07e4b1596ebccdf78c373214711cb8c *R/mcmc.fmove.R
-6785395e9b47763c50e45ebb6890a966 *R/path2ctmc.R
+4856284c9946d43d50c1d29808cdd47d *R/path2ctmc.R
 7cca163d8abe850fd60e4ec2538d1924 *R/rast.grad.R
 9b8da18714841427d308f6eb9012dca8 *build/partial.rdb
 cfe0231f7b95f3d8f22f7a5e1f326040 *data/seal.rda
@@ -17,6 +17,6 @@ f0a445c9eae84b665b48929fd92e53bb *man/ctmcmove-package.Rd
 c6f2f5eccd7a14551b4fea141b78159b *man/get.UD.Rd
 d3170dc403acf2ccd6e93fd3871d36d2 *man/get.rate.matrix.Rd
 c82a7a1a1010c6b3ad9a534ff3911492 *man/mcmc.fmove.Rd
-08b05114247d4d6b60389a4f672d8830 *man/path2ctmc.Rd
+7e18598417208346c55ef2b3bab69bfb *man/path2ctmc.Rd
 90875ceb6919ca04d5290dda1e89b901 *man/rast.grad.Rd
 1db5bda49a4a518f941e486cef7e0855 *man/seal.Rd
