@@ -9,22 +9,14 @@ Create a CTMC rate matrix from rasters and parameter estimates.%%  ~~function to
   (perhaps from a GLM analysis). 
 }
 \usage{
-get.rate.matrix(beta.static,beta.grad, stack.static, stack.grad,
+get.rate.matrix(object, stack.static, stack.grad,
     normalize.gradients = FALSE, grad.point.decreasing = TRUE,
-    directions=4, zero.idx=integer())
+    directions=4, zero.idx=integer(), coef)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{beta.static}{
-A vector of regression parameters corresponding to "motility" covariates
-in stack.static.  The length of beta.static should equal the number of
-layers in stack.static.
-  }
-  \item{beta.grad}{
-A vector of regression parameters corresponding to "directional" or
-"gradient" covariates
-in stack.grad.  The length of beta.static should equal the number of
-layers in stack.grad.
+  \item{object}{
+A fitted GLM or GAM object used to fit the CTMC movement model
   }
   \item{stack.static}{
 A rasterStack object, where each layer in the stack is a location-based covariate.
@@ -52,13 +44,14 @@ of the covariate (like a true gradient).
     Integer vector of the indices of raster cells that are not passable and should be
     excluded.  These are cells where movement should be impossible.  Default is zero.idx=integer().
     }
+    \item{coef}{A vector of coefficents to use in place of those in 'object'}
 }
 \details{
   This function takes the covariate rasters in stack.static (motility
   covariates) and stack.grad (gradient covariates) and creates a CTMC
   rate matrix defining movement between all neighboring raster grid
   cells.  It is NOT possible to include an autocovariate here ("crw" in
-  ctmc2glm).
+  ctmc2glm).  If such was included in the original fitted model, then the crw term is set equal to zero.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{

@@ -10,7 +10,7 @@ Find the stationary distribution of the CTMC.%%  ~~function to do ... ~~
   matrix.  
 }
 \usage{
-get.UD(R,zero.idx=integer())
+get.UD(R,method="lu",maxiter, start, tol)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,14 +19,16 @@ get.UD(R,zero.idx=integer())
     raster cell i to neighboring raster cell j.  R[i,j]=0 implies that
     cells i and j are not first order neighbors.
   }
-  \item{zero.idx}{
-    Integer vector of the indices of raster cells that are not passable and should be
-    excluded.  These are cells where movement should be impossible.  Default is zero.idx=integer().
+  \item{method}{Either "lu" (default) or "limit".  See Details for a description of the two methods.
     }
+  \item{start}{A value for the starting distribution for the 'limit' method. Defaults to 1/num. cells. Ignored for method='lu'.}
+  \item{maxiter}{Total number of iterations for limit method if tolerance not reached first. Defaults to 100. Ignored for method='lu'.}
+  \item{tol}{Value used to assess convergence for limit method. If max(abs(pi1-pi0))<tol, limit method has converged. Defaults to sqrt(.Machine$double.eps)}
+    
 }
 \details{
-  This calculates the stationary distribution of the CTMC using the
-  method on pg. 455 of Harrod and Plemmons (1984).  If R is a sparse
+  This calculates the stationary distribution of the CTMC.  If method="lu", then the method used is the
+  method on pg. 455 of Harrod and Plemmons (1984).  If method="limit", then the stationary distribution is approximated by brute-force simulation.  If R is a sparse
   Matrix object, then sparse matrix methods are used, making this
   calculation extremely efficient.
   %%  ~~ If necessary, more details than the description above ~~

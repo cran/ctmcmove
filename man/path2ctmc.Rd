@@ -12,7 +12,8 @@
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-path2ctmc(xy, t, rast,directions=4,zero.idx=integer(),print.iter=FALSE)
+path2ctmc(xy, t, rast,directions=4,zero.idx=integer(),print.iter=FALSE,
+method="ShortestPath")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -43,8 +44,16 @@ path2ctmc(xy, t, rast,directions=4,zero.idx=integer(),print.iter=FALSE)
   Logical.  If true, then the progress stepping through each
   observed location in "xy" and "t" will be output in the 
    terminal.
-}
-}
+ }
+ \item{method}{
+   Specifies interpolation method.  Either "ShortestPath", which uses
+   the shortest graphical path on the raster graph, or "LinearInterp",
+   which linearly interpolates between observed locations.
+   "ShortestPath" is slower, slightly more accurate, and allows for
+   impassible barriers specified through "zero.idx".  "LinearInterp" is
+   faster but does not allow for impassible barriers.
+ }
+ }
 \details{
   This takes a xyt path and turns it into a list of the embedded chain
   and residence times of a continuous time Markov chain walk on the
