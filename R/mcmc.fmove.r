@@ -73,7 +73,7 @@ mcmc.fmove <- function(xy,t,fdabasis,tpred=t,QQ="CAR2",a=1,b=1,r=1,q=1,n.mcmc=10
     ## make precision matrix of latent Gaussian path
     m=ncol(KP)
     Q=Diagonal(m-1)
-    Q=rBind(Q,0)
+    Q=rbind(Q,0)
     Q=cbind(0,Q)
     Q=-Q-t(Q)
     ones=Matrix(1,nrow=nrow(Q),ncol=1)

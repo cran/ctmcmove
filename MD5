@@ -1,14 +1,13 @@
-ca345c4c159ef68c26192fb1da3b2559 *DESCRIPTION
+918028996dc2d3ef4f1d6924e8cb8acd *DESCRIPTION
 33572cedf2bd64d89b87ac0ecd5bec5f *NAMESPACE
 936be4b3fc99664e891d04ad8b4293f2 *R/Pctmc.R
 52fd8b259554fccbe56b9cfb352745e4 *R/ctmc.sim.R
 12d17e9a55470fb629ef0db0ed6e3d73 *R/ctmc2glm.R
 bac4114cc0fa297e59c6a134edf3c797 *R/get.UD.R
 57636c0184c462953dedda9f336394ae *R/get.rate.matrix.R
-d07e4b1596ebccdf78c373214711cb8c *R/mcmc.fmove.R
+ebad44b62e54441edd38118971ff12d9 *R/mcmc.fmove.r
 0855c9d7cc8a91a74e07569f92838ac8 *R/path2ctmc.R
 7cca163d8abe850fd60e4ec2538d1924 *R/rast.grad.R
-9b8da18714841427d308f6eb9012dca8 *build/partial.rdb
 cfe0231f7b95f3d8f22f7a5e1f326040 *data/seal.rda
 9b4d18d8dd1fd0a6db530fe93780b654 *man/Pctmc.Rd
 6a928da5c2ce0de0749f39564c617395 *man/ctmc.sim.Rd
