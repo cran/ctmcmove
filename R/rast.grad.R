@@ -7,9 +7,9 @@ function(rasterstack){
   ##  which contain the x and y coordinates of the gradient
   ##  of each raster layer.
   ##
-  ## 
+  ##
 
-  if(class(rasterstack)=="RasterStack"){
+  if(inherits(rasterstack,"RasterStack")){
     #browser()
   xy=xyFromCell(rasterstack[[1]],1:length(values(rasterstack[[1]])))
   X=xy
@@ -17,14 +17,14 @@ function(rasterstack){
   X.grad.y=rep(NA,length(values(rasterstack[[1]])))
   for(k in 1:nlayers(rasterstack)){
     X=cbind(X,values(rasterstack[[k]]))
-    slope=terrain(rasterstack[[k]],opt="slope")
+    slope=terrain(rasterstack[[k]],opt="slope",unit="tangent")
     aspect=terrain(rasterstack[[k]],opt="aspect")
     grad.x=-1*slope*cos(.5*pi-aspect)
     values(grad.x)[is.na(values(grad.x))] <- 0
     grad.y=-1*slope*sin(.5*pi-aspect)
     values(grad.y)[is.na(values(grad.y))] <- 0
     X.grad.x=cbind(X.grad.x,values(grad.x))
-    X.grad.y=cbind(X.grad.y,values(grad.y))  
+    X.grad.y=cbind(X.grad.y,values(grad.y))
   }
   X.grad.x=X.grad.x[,-1]
   colnames(X.grad.x) <- names(rasterstack)
@@ -32,11 +32,11 @@ function(rasterstack){
   colnames(X.grad.y) <- names(rasterstack)
   rasterexample=rasterstack[[1]]
   }
-  if(class(rasterstack)=="RasterLayer"){
+  if(inherits(rasterstack,"RasterLayer")){
     xy=xyFromCell(rasterstack,1:length(values(rasterstack)))
     X=xy
     X=cbind(X,values(rasterstack))
-    slope=terrain(rasterstack,opt="slope")
+    slope=terrain(rasterstack,opt="slope",unit="tangent")
     aspect=terrain(rasterstack,opt="aspect")
     grad.x=-1*slope*cos(.5*pi-aspect)
     values(grad.x)[is.na(values(grad.x))] <- 0

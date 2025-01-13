@@ -37,19 +37,19 @@ mcmc.fmove(xy,t,fdabasis,tpred=t,QQ="CAR2",a=1,b=1,r=1,q=1,
     dimension equal to the number of basis functions in fdabasis.
     Defaults to "CAR2".  "CAR1" will result in less-smooth paths.
   }
-  \item{a}{
+  \item{r}{
     The shape parameter of the inverse gamma prior on the observation
     variance.
   }
-  \item{b}{
+  \item{q}{
     The scale parameter of the inverse gamma prior on the observation
     variance.
   }
-  \item{r}{
+  \item{a}{
     The shape parameter of the inverse gamma prior on the partial sill
     parameter of the spline basis coefficients.
   }
-  \item{q}{
+  \item{b}{
     The scale parameter of the inverse gamma prior on the partial sill
     parameter of the spline basis coefficients.
   }
@@ -78,7 +78,7 @@ mcmc.fmove(xy,t,fdabasis,tpred=t,QQ="CAR2",a=1,b=1,r=1,q=1,
 
   y_t ~ N( z_t , sigma^2 )
   
-  beta ~ N( 0 , tau^2 * QQ^{-1} )
+  beta ~ N( 0 , tau^2 * QQ^(-1) )
   
   sigma^2 ~ IG(a,b)
   
@@ -127,5 +127,5 @@ mcmc.fmove(xy,t,fdabasis,tpred=t,QQ="CAR2",a=1,b=1,r=1,q=1,
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~kwd1 }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

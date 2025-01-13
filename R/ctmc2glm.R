@@ -22,10 +22,10 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   if(crw){
     p.crw=1
   }
-  if(class(stack.grad)=="RasterLayer" | class(stack.grad)=="RasterStack"){
+  if(inherits(stack.grad,"RasterLayer") | inherits(stack.grad,"RasterStack")){
     p.grad=nlayers(stack.grad)
     stack.gradient=rast.grad(stack.grad)
-    
+
     if(normalize.gradients){
       lengths=sqrt(stack.gradient$grad.x^2+stack.gradient$grad.y^2)
       stack.gradient$grad.x <- stack.gradient$grad.x/lengths
@@ -36,20 +36,20 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   }
   p=p.static+p.crw+p.grad
 
-  
 
-  if(class(stack.static)=="RasterStack"){
+
+  if(inherits(stack.static,"RasterStack")){
         examplerast=stack.static[[1]]
   }
-  if(class(stack.static)=="RasterLayer"){
+  if(inherits(stack.static,"RasterLayer")){
     examplerast=stack.static
   }
 
   locs=ctmc$ec
   wait.times=ctmc$rt
-    
+
   ##
-  ## Make X matrix 
+  ## Make X matrix
   ##
 
     ## raster cells that are NOT in "zero.idx"
@@ -57,7 +57,7 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
     if(length(zero.idx)>0){
         notzero.idx=notzero.idx[-zero.idx]
     }
-    
+
   ## sort.idx=sort(locs,index.return=TRUE)$ix
   ## This is for a rook's neighborhood
 ##  n.nbrs=4
@@ -81,12 +81,12 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
 
   #browser()
 
-  
+
   ## Tau
   tau=rep(wait.times,times=rr$lengths)
   ##
   t=rep(ctmc$trans.times,times=rr$lengths)
-      
+
   ##
   ## Get x values for static covariates
   ##
@@ -98,7 +98,7 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   }
   #colnames(X.static) <- layerNames(stack.static)
   colnames(X.static) <- names(stack.static)
-  
+
   ##
   ## Get x values for gradiant covariates
   ##
@@ -116,7 +116,7 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
     }
     colnames(X.grad) <- colnames(stack.gradient$grad.x)
   }
-  
+
 
   ##
   ## Get crw covariate
@@ -135,7 +135,7 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
     ## last point
     idx.move=c(idx.move,length(z))
 
-    
+
   v.moves=v.adj[rep(idx.move[1:(length(rr$lengths)-1)],times=rr$lengths[-1]),]
   ## shift v.moves to be a lag 1 direction
   v.moves=rbind(matrix(0,ncol=2,nrow=rr$lengths[1]),v.moves)
@@ -144,8 +144,8 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
   X.crw=apply(v.moves*v.adj,1,sum)
 
   #browser()
- 
-  
+
+
   ## Compiling Matrices
   if(crw==FALSE & p.grad>0){
     X=cbind(X.static,X.grad)
@@ -161,7 +161,7 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
     X=cbind(X.static,X.crw)
     colnames(X)[ncol(X)]="crw"
   }
-  
+
   ## browser()
 
     if(include.cell.locations){
@@ -169,14 +169,14 @@ function(ctmc,stack.static,stack.grad,crw=TRUE,normalize.gradients=FALSE,grad.po
         colnames(xys)=c("x.current","y.current","x.adj","y.adj")
         X=cbind(X,xys)
     }
-                
+
 
   T=length(wait.times)
   p=ncol(X)
-  
+
   #browser()
-    
-  
+
+
 
   out=data.frame(z=z,X,tau=tau,t=t)
   ## remove last time step

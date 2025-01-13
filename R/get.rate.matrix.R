@@ -1,6 +1,6 @@
 get.rate.matrix <-
   function(object, stack.static, stack.grad, normalize.gradients=FALSE, grad.point.decreasing=TRUE, directions=4, zero.idx=integer(), coef){
-    
+
     ##
     ## Inputs:
     ##
@@ -20,7 +20,7 @@ get.rate.matrix <-
     if(inherits(stack.grad, "Raster")){
       p.grad=nlayers(stack.grad)
       stack.gradient=rast.grad(stack.grad)
-      
+
       if(normalize.gradients){
         lengths=sqrt(stack.gradient$grad.x^2+stack.gradient$grad.y^2)
         stack.gradient$grad.x <- stack.gradient$grad.x/lengths
@@ -30,33 +30,33 @@ get.rate.matrix <-
       p.grad=0
     }
     p=p.static+p.crw+p.grad
-    
-    
-    
-    if(class(stack.static)=="RasterStack"){
+
+
+
+    if(inherits(stack.static,"RasterStack")){
       examplerast=stack.static[[1]]
     }
-    if(class(stack.static)=="RasterLayer"){
+    if(inherits(stack.static,"RasterLayer")){
       examplerast=stack.static
     }
-    
+
     locs=1:ncell(examplerast)
     nn=ncell(examplerast)
     R=Matrix(0,nrow=nn,ncol=nn,sparse=TRUE)
     adj=adjacent(examplerast,locs,pairs=TRUE,sorted=TRUE,id=TRUE,directions=directions)
     idx.mot=adj[,2:3]
-    
+
     if(p.static>0){
       X = data.frame(values(stack.static)[idx.mot[,1],])
     }
-    
+
     ##
     ## Get x values for gradiant covariates
     ##
-    
+
     start.cells=idx.mot[,1]
     adj.cells=idx.mot[,2]
-    
+
     xy.cell=xyFromCell(examplerast,start.cells)
     xy.adj=xyFromCell(examplerast,adj.cells)
     ## Find normalized vectors to adjacent cells
@@ -70,21 +70,21 @@ get.rate.matrix <-
       }
       X = cbind(X,X.grad)
     }
-    
+
     X$tau = 1
       X$crw=0
-    
+
     if(missing(coef)){
       R[idx.mot] = as.vector(predict(object, newdata=X, type="response"))
     } else{
       if(length(coef) != length(coefficients(object))) stop("'coef' vector is not the correct length!")
       R[idx.mot] = exp(X%*%coef)
     }
-    
+
     ## exclude "zero" cells
     if(length(zero.idx)>0){
       R[zero.idx,zero.idx]=0
     }
-    
+
     R
   }

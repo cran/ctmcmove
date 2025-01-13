@@ -9,16 +9,16 @@ path2ctmc <- function(xy,t,rast,directions=4,zero.idx=integer(),print.iter=FALSE
     ## method = either "ShortestPath" or "LinearInterp"
 
 
-    if(class(rast)=="RasterStack"){
+    if(inherits(rast,"RasterStack")){
         rast=rast[[1]]
     }
-    
+
     values(rast) <- 1
     values(rast)[zero.idx] <- 0
     trans=transition(rast,prod,directions=directions)
 
 
-    
+
     ncell=ncell(rast)
 
     if(method=="LinearInterp"){
@@ -27,9 +27,9 @@ path2ctmc <- function(xy,t,rast,directions=4,zero.idx=integer(),print.iter=FALSE
         adj=adjacent(rast,1:ncell)
         A[adj] <- 1
     }
-    
 
-    
+
+
     ## path should be a Tx3 matrix with columns: x,y,t
     path=cbind(xy,t)
 
@@ -37,13 +37,13 @@ path2ctmc <- function(xy,t,rast,directions=4,zero.idx=integer(),print.iter=FALSE
     tidx=sort(t,index.return=T)$ix
     path=path[tidx,]
 
-    
+
     T=nrow(path)
 
     ec.all=cellFromXY(rast,xy)
 
     ##head(cbind(path,ec.all))
-    
+
     ec=ec.all[1]
     current.cell=ec
     rt=integer()
